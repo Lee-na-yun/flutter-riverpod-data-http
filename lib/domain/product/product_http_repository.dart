@@ -42,17 +42,24 @@ class ProductHttpRepository {
     return product;
   }
 
-  Product updateById(int id, Product productDto) {
+  Future<Product> updateById(int id, Product productReqDto) async {
     // http 통신 코드
-    final list = [].map((product) {
-      if (product.id == id) {
-        return productDto;
-      } else {
-        return product;
-      }
-    }).toList();
-    productDto.id = id;
-    return productDto;
+    String body = jsonEncode(productReqDto.toJson());
+    print("repository id: ${id}");
+    Response response =
+        await _ref.read(httpConnector).put("/api/product/${id}", body);
+    Product product = Product.fromJson(jsonDecode(response.body)["data"]);
+    return product;
+
+    // final list = [].map((product) {
+    //   if (product.id == id) {
+    //     return productDto;
+    //   } else {
+    //     return product;
+    //   }
+    // }).toList();
+    // productDto.id = id;
+    // return productDto;
   }
 
   Future<int> deleteById(int id) async {

@@ -30,6 +30,7 @@ class HttpConnector {
     return response;
   }
 
+  // update
   Future<Response> put(String path, String body) async {
     // path=주소만들기 & body데이터 필요하니까 넣기
     Uri uri = Uri.parse("${host}${path}");

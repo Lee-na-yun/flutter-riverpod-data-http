@@ -53,9 +53,9 @@ class ProductController {
     // }
   }
 
-  void updateById(int id, Product productReqDto) {
+  void updateById(int id, Product productReqDto) async {
     Product productRespDto =
-        _ref.read(productHttpRepository).updateById(id, productReqDto);
+        await _ref.read(productHttpRepository).updateById(id, productReqDto);
     _ref.read(productListViewModel.notifier).updateProduct(productRespDto);
   }
 }
