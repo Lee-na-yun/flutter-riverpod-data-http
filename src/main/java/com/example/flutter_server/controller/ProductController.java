@@ -25,7 +25,7 @@ public class ProductController {
     @GetMapping("/api/product")
     public ResponseDto<?> findAll() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (Exception e) {
 
         }
@@ -45,7 +45,8 @@ public class ProductController {
     }
 
     @PutMapping("/api/product/{id}")
-    public ResponseDto<?> updateById(@PathVariable Integer id, Product product) {
+    public ResponseDto<?> updateById(@PathVariable Integer id,
+            @RequestBody Product product) {
         product.setId(id);
         return new ResponseDto<>(1, "수정 성공", productRepository.save(product));
     }
