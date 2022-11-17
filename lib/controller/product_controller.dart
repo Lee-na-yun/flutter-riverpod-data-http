@@ -24,9 +24,9 @@ class ProductController {
     _ref.read(productListViewModel.notifier).refresh(productList);
   }
 
-  void insert(Product productReqDto) {
+  Future<void> insert(Product productReqDto) async {
     Product productRespDto =
-        _ref.read(productHttpRepository).insert(productReqDto);
+        await _ref.read(productHttpRepository).insert(productReqDto);
     _ref.read(productListViewModel.notifier).addProduct(productRespDto);
   }
 

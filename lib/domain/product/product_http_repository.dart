@@ -32,10 +32,13 @@ class ProductHttpRepository {
   }
 
   // name, price
-  Product insert(Product product) {
+  Future<Product> insert(Product productReqDto) async {
     // http 통신 코드 (product 전송)
-    product.id = 4;
-
+    // body
+    String body = jsonEncode(productReqDto.toJson());
+    Response response =
+        await _ref.read(httpConnector).post("/api/product", body);
+    Product product = Product.fromJson(jsonDecode(response.body)["data"]);
     return product;
   }
 
