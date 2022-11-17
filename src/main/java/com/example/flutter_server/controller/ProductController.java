@@ -24,6 +24,12 @@ public class ProductController {
 
     @GetMapping("/api/product")
     public ResponseDto<?> findAll() {
+        try {
+            Thread.sleep(5000);
+        } catch (Exception e) {
+
+        }
+
         return new ResponseDto<>(1, "전체 찾기 성공", productRepository.findAll());
     }
 
@@ -34,6 +40,7 @@ public class ProductController {
 
     @PostMapping("/api/product")
     public ResponseDto<?> insert(@RequestBody Product product) {
+        product.setId(null);
         return new ResponseDto<>(1, "추가 성공", productRepository.save(product));
     }
 
